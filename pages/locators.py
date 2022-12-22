@@ -1,5 +1,8 @@
 from selenium.webdriver.common.by import By
 
+class BasePageLocators():
+    USER_ICON = (By.CSS_SELECTOR, ".icon-user")
+
 
 class MainPageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")

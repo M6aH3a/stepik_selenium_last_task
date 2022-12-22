@@ -6,6 +6,7 @@ import time
 params = list(map(str, range(10)))
 
 
+@pytest.mark.need_review
 @pytest.mark.parametrize('param', [
     x if x != '7' else pytest.param(x, marks=pytest.mark.xfail) for x in params])
 def test_guest_can_add_product_to_basket(browser, param):
@@ -18,6 +19,7 @@ def test_guest_can_add_product_to_basket(browser, param):
     page.should_be_message_basket_total()
 
 
+@pytest.mark.need_review
 @pytest.mark.xfail(reason="Success message is presented")
 def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
     link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207"
@@ -27,7 +29,7 @@ def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
     page.should_not_be_success_message()
 
 
-
+@pytest.mark.need_review
 def test_guest_cant_see_success_message(browser):
     link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207"
     page = ProductPage(browser, link)
@@ -35,6 +37,7 @@ def test_guest_cant_see_success_message(browser):
     page.should_not_be_success_message()
 
 
+@pytest.mark.need_review
 @pytest.mark.xfail(reason="Success message is not disappeared")
 def test_message_disappeared_after_adding_product_to_basket(browser):
     link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207"
