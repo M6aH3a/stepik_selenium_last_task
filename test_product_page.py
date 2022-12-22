@@ -1,9 +1,26 @@
 import pytest
 from .pages.product_page import ProductPage
-from selenium.webdriver.common.by import By
+from .pages.login_page import LoginPage
+from .pages.cart_page import CartPage
+import pytest
 import time
 
 params = list(map(str, range(10)))
+
+
+@pytest.mark.auth_user
+class TestUserAddToCartFromProductPage(object):
+
+    @pytest.fixture(scope="function", autouse=True)
+    def setup(self, browser, timeout=5):
+        link = "http://selenium1py.pythonanywhere.com/en-gb/accounts/login/"
+        self.browser = browser
+        self.browser.implicitly_wait(timeout)
+        page = LoginPage(browser, link)
+        page.open()
+        email, password = page.make_email_and_pass()
+        page.register_new_user(email, password)
+        page.should_be_authorized_user()
 
 
 @pytest.mark.need_review
